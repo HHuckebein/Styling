@@ -42,6 +42,7 @@ func applyDecoratedStyle (style: StyleDecorator)
 
 ## How to use it?
 There are three enum types you have to fill with your style needs.
+
 1. FontDesc
 2. SizeDesc
 3. ColorDesc
@@ -55,8 +56,9 @@ let foxStyle  = StyleDecorator.Selection("fox", .NeueBold, .XXL, .Black)
 let dogStyle  = StyleDecorator.Selection("dog", .Oblique, .Small, .Red)
 
 let decoratedStyle = DecoratedStyle(style: baseStyle, options: foxStyle, dogStyle)
+let label.text = "The quick brown fox jumps over the lazy dog."
+label.applyStyle(decoratedStyle)
 
-"The quick brown fox jumps over the lazy dog.".applyStyle(decoratedStyle)
 ```
 The Styles type provides some template methods for styles you use often.
 
