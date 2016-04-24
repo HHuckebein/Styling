@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-enum FontDesc: String, CustomStringConvertible {
+/** Encapsulates the used font types.
+ */
+public enum FontDesc: String, CustomStringConvertible {
     case NeueLight    = "HelveticaNeue-Light"
     case NeueMedium   = "HelveticaNeue-Medium"
     case NeueBold     = "HelveticaNeue-Bold"
@@ -19,6 +21,9 @@ enum FontDesc: String, CustomStringConvertible {
     case Oblique      = "Helvetica-Oblique"
     case LightOblique = "Helvetica-LightOblique"
     
+    /** A corresponding font weight. Used to return a suitable
+        system font if a custom font can't be found.
+     */
     var fontWeight: CGFloat {
         switch self {
         case .Light, .NeueLight:         return UIFontWeightLight
@@ -28,7 +33,7 @@ enum FontDesc: String, CustomStringConvertible {
         }
     }
     
-    var description: String {
+    public var description: String {
         return "FontDesc: fontName: \(fontName)"
     }
     
@@ -37,7 +42,9 @@ enum FontDesc: String, CustomStringConvertible {
     }
 }
 
-enum SizeDesc: CGFloat, CustomStringConvertible {
+/** Encapsulates the used font sizes.
+ */
+public enum SizeDesc: CGFloat, CustomStringConvertible {
     case Tiny    = 10.0
     case Small   = 12.0
     case Compact = 14.0
@@ -49,12 +56,14 @@ enum SizeDesc: CGFloat, CustomStringConvertible {
         return self.rawValue
     }
 
-    var description: String {
+    public var description: String {
         return "ColorDesc: \(self.rawValue)pt"
     }
 }
 
-enum ColorDesc: String, CustomStringConvertible {
+/** Encapsulates the used colors.
+ */
+public enum ColorDesc: String, CustomStringConvertible {
     case Blue, White, Black, Red
     
     var color: UIColor {
@@ -66,7 +75,7 @@ enum ColorDesc: String, CustomStringConvertible {
         }
     }
     
-    var description: String {
+    public var description: String {
         return self.rawValue
     }
 }
@@ -75,17 +84,17 @@ enum ColorDesc: String, CustomStringConvertible {
 // MARK: - Main Styling Type
 ///////////////////////////////////////////////////////
 
-/** Add additional global color or selected text styles to a give style. */
-enum StyleDecorator: CustomStringConvertible {
+/** A decorator which can be used to add an additional global color
+    or selected text styles to a give style.
+ */
+public enum StyleDecorator: CustomStringConvertible {
     case Selection(String, FontDesc, SizeDesc, ColorDesc?)
     case Color(ColorDesc)
     
-    var description: String {
-        get {
-            switch self {
-            case .Color(let colorDesc): return "\(colorDesc)"
-            case .Selection(let text, let fontDesc, let sizeDesc, let colorDesc):  return "(style \"\(text)\" with font \(fontDesc)/\(sizeDesc) color \(colorDesc!))"
-            }
+    public var description: String {
+        switch self {
+        case .Color(let colorDesc): return "\(colorDesc)"
+        case .Selection(let text, let fontDesc, let sizeDesc, let colorDesc):  return "(style \"\(text)\" with font \(fontDesc)/\(sizeDesc) color \(colorDesc!))"
         }
     }
     
@@ -112,13 +121,15 @@ enum StyleDecorator: CustomStringConvertible {
 }
 
 /** The base style class to use.
+ Initialized with `fontDesc`, `sizeDesc` and `colorDesc` or
+ by using predefined convenience styles.
  - Parameter font: - An enum value specifying the font.
  - Parameter fontSize: - The font size enum.
  - Parameter color: - The color enum.
  - Returns: A style object to be used with `applyStylingToElement`
  */
 
-class Style: CustomStringConvertible {
+public class Style: CustomStringConvertible {
     private let fontDesc:  FontDesc
     private let sizeDesc:  SizeDesc
     private let colorDesc: ColorDesc
@@ -129,37 +140,38 @@ class Style: CustomStringConvertible {
         self.colorDesc = colorDesc
     }
     
-    var description: String {
+    public var description: String {
         return "\(fontDesc)(\(sizeDesc)) \(colorDesc)"
     }
     
     // MARK - Some sample convenience methods for illustration
     
-    static var Headline1: Style {
+    // Headline1 Style
+    public static var Headline1: Style {
         return Style(fontDesc: .Light, sizeDesc: .XXL)
     }
     
-    static var Headline2: Style {
+    public static var Headline2: Style {
         return Style(fontDesc: .Light, sizeDesc: .Big)
     }
     
-    static var Headline3: Style {
+    public static var Headline3: Style {
         return Style(fontDesc: .Light, sizeDesc: .Medium)
     }
     
-    static var Copy: Style {
+    public static var Copy: Style {
         return Style(fontDesc: .Light, sizeDesc: .Compact)
     }
     
-    static var Caption2: Style {
+    public static var Caption2: Style {
         return Style(fontDesc: .Light, sizeDesc: .Small)
     }
     
-    static var Caption1: Style {
+    public static var Caption1: Style {
         return Style(fontDesc: .Oblique, sizeDesc: .Small)
     }
     
-    static var Footnote: Style {
+    public static var Footnote: Style {
         return Style(fontDesc: .Light, sizeDesc: .Tiny)
     }
     
@@ -167,7 +179,7 @@ class Style: CustomStringConvertible {
      - Parameter style: A style from `Style`.
      - Returns: The font required by `style`. Falls back to a system font with a UIFontWeightTrait compatible defined in `FontDesc`.
      */
-    static func fontForStyle (style: Style) -> UIFont {
+    public static func fontForStyle (style: Style) -> UIFont {
         return UIFont(name: style.fontDesc.fontName, size: style.sizeDesc.fontSize) ?? UIFont.systemFontOfSize(17.0, weight: style.fontDesc.fontWeight)
     }
     
@@ -176,7 +188,7 @@ class Style: CustomStringConvertible {
      - Parameter style: A style from `Style`.
      - Returns: `NSFontAttributeName` and `NSForegroundColorAttributeName` values dictionary. Ignores `Style`.
      */
-    static func baseAttributesForStyle (style: Style) -> [String : AnyObject] {
+    public static func baseAttributesForStyle (style: Style) -> [String : AnyObject] {
         return [NSFontAttributeName: Style.fontForStyle(style), NSForegroundColorAttributeName: style.colorDesc.color]
     }
 }
@@ -187,7 +199,7 @@ class Style: CustomStringConvertible {
  - Returns: A style object to be used with `applyStylingToElement`.
  */
 
-class DecoratedStyle: Style {
+public class DecoratedStyle: Style {
     let style: Style
     let options: [StyleDecorator]
     
@@ -203,11 +215,9 @@ class DecoratedStyle: Style {
         }
     }
     
-    override var description: String {
-        get {
-            let optionString = options.map({"\($0)"}).reduce(" - ") { $0 + $1 + " "}
-            return super.description + optionString
-        }
+    public override var description: String {
+        let optionString = options.map({"\($0)"}).reduce(" - ") { $0 + $1 + " "}
+        return super.description + optionString
     }
 }
 
@@ -215,7 +225,7 @@ class DecoratedStyle: Style {
 // MARK: - Extensions
 ///////////////////////////////////////////////////////
 
-extension UIButton {
+public extension UIButton {
     func applyStyle (style: Style, forState state: UIControlState = UIControlState.Normal) {
         self.setTitleColor(style.colorDesc.color, forState: state)
         
@@ -228,7 +238,7 @@ extension UIButton {
     }
 }
 
-extension UILabel {
+public extension UILabel {
     /** Applies a style to a given `UILabel` object.
      If the `text` property is not empty, applies the style to the
      `attributedString` property, otherwise sets `font` and `textColor` properties.
@@ -246,7 +256,7 @@ extension UILabel {
     }
 }
 
-extension NSMutableAttributedString {
+public extension NSMutableAttributedString {
     func applyDecoratedStyle (style: StyleDecorator) {
         switch style {
         case .Color(let color):
@@ -266,7 +276,7 @@ extension NSMutableAttributedString {
     }
 }
 
-extension NSAttributedString {
+public extension NSAttributedString {
     static func attributedStringWithText(text: String, style: Style) -> NSAttributedString {
         let font = Style.fontForStyle(style)
         let color = style.colorDesc.color
