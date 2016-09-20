@@ -17,25 +17,25 @@ modify an `NSMutableAttributedString`.
 ### `UIButton`
 
 ```swift
-func applyStyle (style: Style, forState state: UIControlState = UIControlState.Normal)
+func apply (style: Style, forState state: UIControlState = UIControlState.Normal)
 ```
 
 ### `UILabel`
 
 ```swift
-func applyStyle (style: Style)
+func apply (style: Style)
 ```
 
 ### `NSAttributedText`
 
 ```swift
-static func attributedStringWithText(text: String, style: Style) -> NSAttributedString
+static func attributedString(with text: String, style: Style) -> NSAttributedString
 ```
 
 ### `NSMutableAttributedText`
 
 ```swift
-func applyDecoratedStyle (style: StyleDecorator)
+func applyDecorated (style: StyleDecorator)
 ```
 
 -------------------
@@ -69,7 +69,7 @@ The Styles type provides some template methods for styles you use often.
 ## What you should know
 
 1. If you provide more than one ColorDesc as option to a DecoratedStyle the last color option wins.
-2. The `static func fontForStyle (style: Style)` always gives you a font back. If the font defined in your style can't
+2. The `static func font (for style: Style)` always gives you a font back. If the font defined in your style can't
 be found, it falls back to a similar system font.
 3. Styling of attributed text is limited to font an color.
 

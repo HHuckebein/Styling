@@ -8,9 +8,9 @@
 
 import Foundation
 
-func delay (duration: NSTimeInterval, completion: ()->() ) {
+func delay (_ duration: TimeInterval, completion: @escaping ()->() ) {
     let triggerTime = Int64(Double(NSEC_PER_SEC) * duration)
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(triggerTime) / Double(NSEC_PER_SEC), execute: { () -> Void in
         completion()
     })
 }

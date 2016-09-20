@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5DF194FF1C6D118C0027535F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5DF194FD1C6D118C0027535F /* README.md */; };
-		5DF195001C6D118C0027535F /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5DF194FE1C6D118C0027535F /* LICENSE.txt */; };
 		67440D631BBACCDA007B8B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67440D621BBACCDA007B8B26 /* AppDelegate.swift */; };
 		67440D651BBACCDA007B8B26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67440D641BBACCDA007B8B26 /* ViewController.swift */; };
 		67440D681BBACCDA007B8B26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67440D661BBACCDA007B8B26 /* Main.storyboard */; };
@@ -17,6 +15,7 @@
 		67440D791BBACCDA007B8B26 /* StylingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67440D781BBACCDA007B8B26 /* StylingTests.swift */; };
 		676FC0EA1BBCFDC700CE4815 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FC0E91BBCFDC700CE4815 /* Styling.swift */; };
 		7340B13E1C6606650051C4D1 /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7340B13D1C6606650051C4D1 /* Support.swift */; };
+		7363A8BF1CCD3EC000AC5F2B /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5DF194FE1C6D118C0027535F /* LICENSE.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,14 +168,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Bernd Rabe";
 				TargetAttributes = {
 					67440D5C1BBACCDA007B8B26 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
 					};
 					67440D711BBACCDA007B8B26 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
 						TestTargetID = 67440D5C1BBACCDA007B8B26;
 					};
 				};
@@ -205,7 +206,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DF195001C6D118C0027535F /* LICENSE.txt in Resources */,
+				7363A8BF1CCD3EC000AC5F2B /* LICENSE.txt in Resources */,
 				67440D681BBACCDA007B8B26 /* Main.storyboard in Resources */,
 				67440D6D1BBACCDA007B8B26 /* LaunchScreen.xib in Resources */,
 				67440D6A1BBACCDA007B8B26 /* Images.xcassets in Resources */,
@@ -228,7 +229,6 @@
 			files = (
 				676FC0EA1BBCFDC700CE4815 /* Styling.swift in Sources */,
 				7340B13E1C6606650051C4D1 /* Support.swift in Sources */,
-				5DF194FF1C6D118C0027535F /* README.md in Sources */,
 				67440D651BBACCDA007B8B26 /* ViewController.swift in Sources */,
 				67440D631BBACCDA007B8B26 /* AppDelegate.swift in Sources */,
 			);
@@ -285,8 +285,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -330,8 +332,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -350,6 +354,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -362,6 +367,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.berndrabe.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -373,6 +379,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.berndrabe.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -392,6 +399,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.berndrabe.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Styling.app/Styling";
 			};
 			name = Debug;
@@ -408,6 +416,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.berndrabe.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Styling.app/Styling";
 			};
 			name = Release;

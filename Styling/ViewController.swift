@@ -16,40 +16,40 @@ class ViewController: UIViewController {
     
     // MARK: Private API
     
-    private var style : Style = Style.Headline1 {
+    fileprivate var style : Style = Style.Headline1 {
         didSet {
-            textLabel.applyStyle(style)
+            textLabel.apply(style: style)
         }
     }
     
-    private var selectedIndexPath: NSIndexPath = NSIndexPath(forItem: 0, inSection: 0) {
+    fileprivate var selectedIndexPath: IndexPath = IndexPath(item: 0, section: 0) {
         didSet {
             style = updateCurrentStyle()
         }
     }
     
-    private lazy var dataSourcePicker: Array<String>? = {
-        var allFonts = UIFont.familyNames() as [String]
-        let dataSourcePicker = allFonts.filter{ $0.rangeOfString("Helvetica") != nil }
+    fileprivate lazy var dataSourcePicker: Array<String>? = {
+        var allFonts = UIFont.familyNames as [String]
+        let dataSourcePicker = allFonts.filter{ $0.range(of: "Helvetica") != nil }
         
         return dataSourcePicker
     }()
     
-    private var dataSourceTableView: Array<UIFontDescriptor>? {
+    fileprivate var dataSourceTableView: Array<UIFontDescriptor>? {
         didSet {
-            tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+            tableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
             delay(0.25) { () -> () in
-                self.tableView.selectRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: true, scrollPosition: .Top)
-                self.selectedIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+                self.tableView.selectRow(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
+                self.selectedIndexPath = IndexPath(item: 0, section: 0)
             }
         }
     }
     
     // MARK: Helper
 
-    private func currentFontDescriptor () -> FontDesc {
+    fileprivate func currentFontDescriptor () -> FontDesc {
         var fontDesc: FontDesc = .Light
-        if let dataSource = dataSourceTableView, let fontName = dataSource[selectedIndexPath.item].objectForKey(UIFontDescriptorNameAttribute) as? String {
+        if let dataSource = dataSourceTableView, let fontName = dataSource[(selectedIndexPath as NSIndexPath).item].object(forKey: UIFontDescriptorNameAttribute) as? String {
             if let desc = FontDesc(rawValue: fontName) {
                 fontDesc = desc
             }
@@ -57,16 +57,16 @@ class ViewController: UIViewController {
         return fontDesc
     }
     
-    private func updateCurrentStyle () -> Style {
+    fileprivate func updateCurrentStyle () -> Style {
         let fontDesc = currentFontDescriptor()
-        let baseStyle = Style(fontDesc: fontDesc, sizeDesc: .Big, colorDesc: .Blue)
-        let foxStyle  = StyleDecorator.Selection("fox", .NeueBold, .XXL, .Black)
-        let dogStyle  = StyleDecorator.Selection("dog", .Oblique, .Small, .Red)
+        let baseStyle = Style(fontDesc: fontDesc, sizeDesc: .big, colorDesc: .Blue)
+        let foxStyle  = StyleDecorator.selection("fox", .NeueBold, .xxl, .Black)
+        let dogStyle  = StyleDecorator.selection("dog", .Oblique, .small, .Red)
         
         return DecoratedStyle(style: baseStyle, options: foxStyle, dogStyle)
     }
     
-    private func styleForFontName(fontName: String, sizeDesc: SizeDesc) -> Style {
+    fileprivate func styleForFontName(_ fontName: String, sizeDesc: SizeDesc) -> Style {
         if let fontDesc = FontDesc(rawValue: fontName) {
             return Style(fontDesc: fontDesc, sizeDesc: sizeDesc)
         } else {
@@ -74,37 +74,37 @@ class ViewController: UIViewController {
         }
     }
     
-    private func customizeForFirstAppearance () {
+    fileprivate func customizeForFirstAppearance () {
         // disable empty cell display
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         self.textLabel.text = "The quick brown fox jumps over the lazy dog"
         updateTableViewDataSourceForIndex(0)
     }
     
-    private func fontLabelForPickerView (pickerView: UIPickerView, familyName: String?) -> UILabel {
-        let label       = UILabel(frame: CGRectMake(30, 0, CGRectGetWidth(pickerView.bounds) - 30, 30))
+    fileprivate func fontLabelForPickerView (_ pickerView: UIPickerView, familyName: String?) -> UILabel {
+        let label       = UILabel(frame: CGRect(x: 30, y: 0, width: pickerView.bounds.width - 30, height: 30))
         label.text      = familyName ?? ""
-        label.font      = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        label.textColor = UIColor.blackColor()
+        label.font      = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        label.textColor = UIColor.black
         
         return label
     }
     
-    private func updateTableViewDataSourceForIndex (index: Int) {
+    fileprivate func updateTableViewDataSourceForIndex (_ index: Int) {
         if let familiyName = dataSourcePicker?[index] {
             let customFontFamily = UIFontDescriptor(fontAttributes: [UIFontDescriptorFamilyAttribute: familiyName])
-            dataSourceTableView = customFontFamily.matchingFontDescriptorsWithMandatoryKeys(nil) as Array<UIFontDescriptor>
+            dataSourceTableView = customFontFamily.matchingFontDescriptors(withMandatoryKeys: nil) as Array<UIFontDescriptor>
         }
     }
     
-    private func configureCell (cell: UITableViewCell, index: Int) -> Bool {
-        if let descriptor = dataSourceTableView?[index], let fontName = descriptor.fontAttributes()[UIFontDescriptorNameAttribute] as? String {
+    fileprivate func configureCell (_ cell: UITableViewCell, index: Int) -> Bool {
+        if let descriptor = dataSourceTableView?[index], let fontName = descriptor.fontAttributes[UIFontDescriptorNameAttribute] as? String {
             cell.textLabel?.text       = fontName
-            cell.detailTextLabel?.text = "size \(SizeDesc.Medium.fontSize)"
+            cell.detailTextLabel?.text = "size \(SizeDesc.medium.fontSize)"
             
-            cell.textLabel?.applyStyle(styleForFontName(fontName, sizeDesc: .Medium))
-            cell.detailTextLabel?.applyStyle(styleForFontName(fontName, sizeDesc: .Tiny))
+            cell.textLabel?.apply(style: styleForFontName(fontName, sizeDesc: .medium))
+            cell.detailTextLabel?.apply(style: styleForFontName(fontName, sizeDesc: .tiny))
             
             return true
         }
@@ -115,16 +115,16 @@ class ViewController: UIViewController {
 // MARK: - UITableViewDataSource/UITableViewDelegate
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSourceTableView?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SubtitleCell", forIndexPath: indexPath)
-        return configureCell(cell, index: indexPath.row) ? cell : UITableViewCell(frame: CGRectZero)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SubtitleCell", for: indexPath)
+        return configureCell(cell, index: (indexPath as NSIndexPath).row) ? cell : UITableViewCell(frame: CGRect.zero)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
     }
 }
@@ -132,19 +132,19 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: UIPickerView Provider
 
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         updateTableViewDataSourceForIndex(row)
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return dataSourcePicker?.count ?? 0
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         return fontLabelForPickerView(pickerView, familyName: dataSourcePicker?[row])
     }
     
