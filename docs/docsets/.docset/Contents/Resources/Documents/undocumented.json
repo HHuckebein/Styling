@@ -1,0 +1,19 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/bernd/Documents/iPhoneDev/Projects/Public/Styling/Styling/Styling.swift",
+      "line": 129,
+      "symbol": "StyleDecorator.selection",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/bernd/Documents/iPhoneDev/Projects/Public/Styling/Styling/Styling.swift",
+      "line": 130,
+      "symbol": "StyleDecorator.Color",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/bernd/Documents/iPhoneDev/Projects/Public/Styling"
+}

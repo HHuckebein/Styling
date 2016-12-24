@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (95% documented)</p>
+        <p class="header-right"><a href="https://github.com/HHuckebein/Styling.git"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/DecoratedStyle.html">DecoratedStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Style.html">Style</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ColorDesc.html">ColorDesc</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/FontDesc.html">FontDesc</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SizeDesc.html">SizeDesc</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/StyleDecorator.html">StyleDecorator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/NSAttributedString.html">NSAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/NSMutableAttributedString.html">NSMutableAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/UIButton.html">UIButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/UILabel.html">UILabel</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#styling' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='styling'>Styling</h1>
+
+<hr>
+
+<p>You usually use <em>UIAppearance</em> methods to consistent styling througout your App, do you?
+Thats fine as long as you have only static styling. As soon as you need a dynamic styling
+behaviour you have to use other means to get the job done, as appearance is applied <strong>before</strong>
+your object gets added to the view hierarchy.</p>
+
+<p>Styling is a sample implementation to keep all your font/color settings in one place. It is easy
+to understand and could easily be extended. </p>
+
+<p>It provides methods to apply a style (<code>UIButton</code>/<code>UILabel</code>), generate an <code>NSAttributedString</code> or
+modify an <code>NSMutableAttributedString</code>.</p>
+<a href='#code-uibutton-code' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='code-uibutton-code'><code>UIButton</code></h3>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">apply</span> <span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt">Style</span><span class="p">,</span> <span class="n">forState</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">UIControlState</span> <span class="o">=</span> <span class="kt">UIControlState</span><span class="o">.</span><span class="kt">Normal</span><span class="p">)</span>
+</code></pre>
+<a href='#code-uilabel-code' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='code-uilabel-code'><code>UILabel</code></h3>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">apply</span> <span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt">Style</span><span class="p">)</span>
+</code></pre>
+<a href='#code-nsattributedtext-code' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='code-nsattributedtext-code'><code>NSAttributedText</code></h3>
+<pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">attributedString</span><span class="p">(</span><span class="n">with</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">style</span><span class="p">:</span> <span class="kt">Style</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSAttributedString</span>
+</code></pre>
+<a href='#code-nsmutableattributedtext-code' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='code-nsmutableattributedtext-code'><code>NSMutableAttributedText</code></h3>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applyDecorated</span> <span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="kt">StyleDecorator</span><span class="p">)</span>
+</code></pre>
+
+<hr>
+<a href='#how-to-use-it' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='how-to-use-it'>How to use it?</h2>
+
+<p>There are three enum types you have to fill with your style needs.</p>
+
+<ol>
+<li>FontDesc</li>
+<li>SizeDesc</li>
+<li>ColorDesc</li>
+</ol>
+
+<p>So if you need to style the string <em><q>The quick brown fox jumps over the lazy dog.</q></em> where the <q>*fox</q>*
+and <em><q>dog</q></em> should have a different styling you create the style as follows:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">baseStyle</span> <span class="o">=</span> <span class="kt">Style</span><span class="p">(</span><span class="nv">fontDesc</span><span class="p">:</span> <span class="n">fontDesc</span><span class="p">,</span> <span class="nv">sizeDesc</span><span class="p">:</span> <span class="o">.</span><span class="kt">Big</span><span class="p">,</span> <span class="nv">colorDesc</span><span class="p">:</span> <span class="o">.</span><span class="kt">Blue</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">foxStyle</span>  <span class="o">=</span> <span class="kt">StyleDecorator</span><span class="o">.</span><span class="kt">Selection</span><span class="p">(</span><span class="s">"fox"</span><span class="p">,</span> <span class="o">.</span><span class="kt">NeueBold</span><span class="p">,</span> <span class="o">.</span><span class="kt">XXL</span><span class="p">,</span> <span class="o">.</span><span class="kt">Black</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">dogStyle</span>  <span class="o">=</span> <span class="kt">StyleDecorator</span><span class="o">.</span><span class="kt">Selection</span><span class="p">(</span><span class="s">"dog"</span><span class="p">,</span> <span class="o">.</span><span class="kt">Oblique</span><span class="p">,</span> <span class="o">.</span><span class="kt">Small</span><span class="p">,</span> <span class="o">.</span><span class="kt">Red</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">decoratedStyle</span> <span class="o">=</span> <span class="kt">DecoratedStyle</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="n">baseStyle</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="n">foxStyle</span><span class="p">,</span> <span class="n">dogStyle</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"The quick brown fox jumps over the lazy dog."</span>
+<span class="n">label</span><span class="o">.</span><span class="nf">applyStyle</span><span class="p">(</span><span class="n">decoratedStyle</span><span class="p">)</span>
+
+</code></pre>
+
+<p>The Styles type provides some template methods for styles you use often.</p>
+<pre class="highlight swift"><code> <span class="n">yourLabel</span><span class="o">.</span><span class="nf">applyStyle</span><span class="p">(</span><span class="kt">Style</span><span class="o">.</span><span class="kt">Headline</span><span class="p">)</span>
+</code></pre>
+<a href='#what-you-should-know' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='what-you-should-know'>What you should know</h2>
+
+<ol>
+<li>If you provide more than one ColorDesc as option to a DecoratedStyle the last color option wins.</li>
+<li>The <code>static func font (for style: Style)</code> always gives you a font back. If the font defined in your style can&rsquo;t
+be found, it falls back to a similar system font.</li>
+<li>Styling of attributed text is limited to font an color.</li>
+</ol>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2016 <a class="link" href="http://berndrabe.de" target="_blank" rel="external">RABE_IT Services</a> under <a class="link" href="https://github.com/HHuckebein/Styling/blob/master/LICENSE.txt" target="_blank" rel="external">open source license</a>.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
