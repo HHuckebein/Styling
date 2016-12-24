@@ -5,4 +5,4 @@ exclude: [Styling/Support.swift, Styling/AppDelegate.swift, Styling/ViewControll
 copyright: '© 2016 [RABE_IT Services](http://berndrabe.de) under [open source license](https://github.com/HHuckebein/Styling/blob/master/LICENSE.txt).'
 clean: true
 
-swift_version: 2.2
+swift_version: 3.0.2
